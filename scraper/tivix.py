@@ -3,12 +3,16 @@ import random
 import requests
 from lxml import html
 
-def get_random_tivix_member_bio():
+def get_random_tivix_member_bio(member=None):
     '''
     returns a string of a randomly chosen tivix member bio
+    or get specific team member (for testing)
     '''
-    members = get_list_of_tivix_members()
-    member_url = random.choice(members)
+    if not member:
+        members = get_list_of_tivix_members()
+        member_url = random.choice(members)
+    else:
+        member_url = '/team-members/%s/' % member
     page = requests.get('http://www.tivix.com' + member_url)
     tree = html.fromstring(page.content)
     name = tree.xpath('//h1[@class="member-name"]/text()')[0]

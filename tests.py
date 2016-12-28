@@ -11,6 +11,7 @@ def test_get_all_tivix_members():
     assert '/team-members/george-bush/' not in members
 
 def test_output_random_bio():
-    bio = get_random_tivix_member_bio()
-    print(bio)
+    bio = get_random_tivix_member_bio('bret-waters')
+    assert 'Bret Waters' in bio
+    assert 'ridiculously smart team' in bio
 

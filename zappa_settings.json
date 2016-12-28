@@ -1,0 +1,6 @@
+{
+    "dev": {
+        "app_function": "main.py", 
+        "s3_bucket": "zappa-6rs3a7nz5"
+    }
+}

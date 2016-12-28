@@ -21,7 +21,7 @@ def launch():
 @ask.intent('YesIntent')
 def hello():
     tivix_member_bio = get_random_tivix_member_bio()
-    message = tivix_member_bio + 'Would you like to hear more?'
+    message = tivix_member_bio + '. . .Would you like to hear more?'
     return question(message).reprompt(REPROMPT_TEXT)
 
 @ask.intent('NoIntent')

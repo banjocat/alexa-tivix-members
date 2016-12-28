@@ -13,9 +13,9 @@ def get_random_tivix_member_bio():
     tree = html.fromstring(page.content)
     name = tree.xpath('//h1[@class="member-name"]/text()')[0]
     position = tree.xpath('//h2[@class="member-title"]/text()')[0]
-    bio_list = tree.xpath('//div[@class="member-bio"]/div//text()')
+    bio_list = tree.xpath('//div[@class="member-bio"]/div/div//text()')
     bio = ' '.join(bio_list)
-    # Creating the full text with correct puncutation
+    # Creating the full text with correct punctuation
     full_text = '%s. %s. %s.' % (name, position, bio)
     return full_text
 

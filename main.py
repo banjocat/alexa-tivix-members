@@ -16,7 +16,7 @@ REPROMPT_TEXT = 'Sorry, I did not understand you. Please say Yes or No. Would yo
 
 @ask.launch
 def launch():
-    welcome_message = "Greetings. Would you like to hear about a Tivix member?"
+    welcome_message = "Greetings. Would you like to hear about a Tivix member? Please say Yes for a random member, No to stop or Tell me about Bret Waters"
     return question(welcome_message).reprompt(REPROMPT_TEXT)
 
 @ask.intent('YesIntent')

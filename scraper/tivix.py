@@ -25,7 +25,7 @@ def get_closest_tivix_matched_bio(name):
     # the url is lowercase and hyphens instead of spaces
     name_formatted = name.replace(' ', '-').lower()
     name_url = '/team-members/%s/' % name_formatted
-    member_matches = difflib.get_close_matches(name_url, members, n=1, cutoff=.9)
+    member_matches = difflib.get_close_matches(name_url, members, n=1, cutoff=.6)
     if len(member_matches) != 1:
         return "Unable to find tivix member."
     member_url = member_matches[0]

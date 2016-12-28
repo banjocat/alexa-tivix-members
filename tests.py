@@ -21,6 +21,10 @@ def test_bio_to_alexa_string():
 def test_closest_match():
     sumit_bio = get_closest_tivix_matched_bio('Sumit')
     assert 'Sumit' in sumit_bio
+    bret_bio = get_closest_tivix_matched_bio('Bret aters')
+    assert 'Bret Waters' in bret_bio
+    silin_bio = get_closest_tivix_matched_bio('Silin Ya')
+    assert 'Silin Na' in silin_bio
 
 
 

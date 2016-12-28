@@ -1,0 +1,6 @@
+NoIntent no
+NoIntent done
+YesIntent yes
+YesIntent yeah
+YesIntent okay
+YesIntent sure

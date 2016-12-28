@@ -4,7 +4,7 @@ import logging
 from flask import Flask
 from flask_ask import Ask, question, statement
 
-from scraper import get_random_tivix_member_bio
+from scraper.tivix import get_random_tivix_member_bio
 
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ def launch():
 @ask.intent('YesIntent')
 def hello():
     tivix_member_bio = get_random_tivix_member_bio()
-    message = tivix_member_bio + 'Would you like to hear about another Tivix member?'
+    message = tivix_member_bio + 'Would you like to hear more?'
     return question(message).reprompt(REPROMPT_TEXT)
 
 @ask.intent('NoIntent')

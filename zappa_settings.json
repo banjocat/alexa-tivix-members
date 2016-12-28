@@ -1,6 +1,7 @@
 {
     "dev": {
-        "app_function": "main.py", 
+        "app_function": "main.app", 
+        "aws_region": "us-east-1",
         "s3_bucket": "zappa-6rs3a7nz5"
     }
 }

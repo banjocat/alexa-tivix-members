@@ -5,6 +5,15 @@
     },
     {
       "intent": "YesIntent"
+    },
+    {
+      "intent": "MemberIntent",
+      "slots": [
+          {
+              "name": "member",
+              "type": "AMAZON.person"
+          }
+      ]
     }
   ]
 }

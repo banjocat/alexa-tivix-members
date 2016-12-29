@@ -1,8 +1,9 @@
 NoIntent no
 NoIntent done
+NoIntent stop
 YesIntent yes
 YesIntent yeah
 YesIntent okay
 YesIntent sure
 MemberIntent tell me about {member}
-
+MemberIntent about {member}

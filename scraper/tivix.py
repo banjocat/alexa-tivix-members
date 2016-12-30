@@ -33,6 +33,9 @@ def get_closest_tivix_matched_bio(name):
     return full_text
 
 def _create_bio_from_member_url(member_url):
+    '''
+    creates an alexa statement from the tivix member's bio page
+    '''
     page = requests.get('http://www.tivix.com' + member_url)
     tree = html.fromstring(page.content)
     name = tree.xpath('//h1[@class="member-name"]/text()')[0]

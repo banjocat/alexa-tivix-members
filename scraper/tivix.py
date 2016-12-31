@@ -33,7 +33,7 @@ def get_closest_tivix_matched_bio(name):
     member_match = process.extractOne(name_formatted, members)
     logging.debug('member_match: %s' % str(member_match))
     if member_match[1] < LEVESHTEIN_LIMIT:
-        return "Cannot find %s" % name
+        return "Cannot find %s." % name
     member = member_match[0]
     member_url = '/team-members/%s/' % member.replace(' ', '-')
     full_text = _create_bio_from_member_url(member_url)

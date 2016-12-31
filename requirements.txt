@@ -11,6 +11,7 @@ enum34==1.1.6
 Flask==0.11.1
 Flask-Ask==0.8.2
 futures==3.0.5
+fuzzywuzzy==0.14.0
 hjson==2.0.2
 idna==2.1
 ipaddress==1.0.17
@@ -27,6 +28,7 @@ pyasn1==0.1.9
 pycparser==2.17
 pyOpenSSL==16.2.0
 python-dateutil==2.6.0
+python-Levenshtein==0.12.0
 python-slugify==1.2.1
 PyYAML==3.12
 requests==2.12.4

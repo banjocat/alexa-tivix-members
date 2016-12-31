@@ -11,6 +11,19 @@ def test_get_all_tivix_members():
     assert '/team-members/will-liu/' in members
     assert '/team-members/george-bush/' not in members
 
+def test_get_only_tivix_names():
+    members = _get_list_of_tivix_members(full_url=False)
+    assert members
+    assert 'jack muratore' in  members
+    assert 'kyle connors' in members
+    assert 'tan nguyen' in members
+    assert 'will liu' in members
+    assert 'george bush' not in members
+
+def test_cannot_find_member():
+    no_bio = get_closest_tivix_matched_bio('George Bush')
+    assert no_bio == 'Cannot find George Bush'
+
 def test_bio_to_alexa_string():
     bret_bio = get_random_tivix_member_bio('bret-waters')
     assert 'Bret Waters' in bret_bio
@@ -19,12 +32,9 @@ def test_bio_to_alexa_string():
     assert 'hardest person' in flavio_bio
 
 def test_closest_match():
-    sumit_bio = get_closest_tivix_matched_bio('Sumit')
-    assert 'Sumit' in sumit_bio
-    bret_bio = get_closest_tivix_matched_bio('Bret aters')
-    assert 'Bret Waters' in bret_bio
-    silin_bio = get_closest_tivix_matched_bio('Silin Ya')
-    assert 'Silin Na' in silin_bio
+    assert 'Sumit' in  get_closest_tivix_matched_bio('Sumit')
+    assert 'Bret' in get_closest_tivix_matched_bio('Bret Waters')
+    assert 'Jack' in get_closest_tivix_matched_bio('Jack')
 
 
 

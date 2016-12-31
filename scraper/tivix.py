@@ -1,8 +1,13 @@
 import random
 import difflib
+import re
+import logging
 
 import requests
+from fuzzywuzzy import process
 from lxml import html
+
+LEVESHTEIN_LIMIT = 60
 
 def get_random_tivix_member_bio(member=None):
     '''
@@ -21,14 +26,16 @@ def get_closest_tivix_matched_bio(name):
     '''
     returns the closet matched bio from name
     '''
-    members = _get_list_of_tivix_members()
-    # the url is lowercase and hyphens instead of spaces
-    name_formatted = name.replace(' ', '-').lower()
-    name_url = '/team-members/%s/' % name_formatted
-    member_matches = difflib.get_close_matches(name_url, members, n=1, cutoff=.6)
-    if len(member_matches) != 1:
-        return "Unable to find tivix member."
-    member_url = member_matches[0]
+    logging.debug('Spoken name: %s' % name)
+    members = _get_list_of_tivix_members(full_url=False)
+    # members are lowercase
+    name_formatted = name.lower()
+    member_match = process.extractOne(name_formatted, members)
+    logging.debug('member_match: %s' % str(member_match))
+    if member_match[1] < LEVESHTEIN_LIMIT:
+        return "Cannot find %s" % name
+    member = member_match[0]
+    member_url = '/team-members/%s/' % member.replace(' ', '-')
     full_text = _create_bio_from_member_url(member_url)
     return full_text
 
@@ -46,13 +53,29 @@ def _create_bio_from_member_url(member_url):
     full_text = '%s. %s. %s.' % (name, position, bio)
     return full_text
 
-def _get_list_of_tivix_members():
+def _get_list_of_tivix_members(full_url=True, lastname=True):
     '''
     returns an array of tivix member bio url paths
+    if full_url is set to false it will just return the names
+    if lastname is set and full_url is false.. it will
+    only include the first name
     '''
     page = requests.get('http://www.tivix.com/team-members/')
     tree = html.fromstring(page.content)
     members = tree.xpath('//div[@class="team-member"]/a/attribute::href')
-    return members
+    if full_url:
+        return members
+    # stripping out the url part
+    names_only = []
+    get_name = re.compile('/team-members/(.*)-(.*)/')
+    for member in members:
+        match = get_name.match(member)
+        if not match:
+            logging.error('invalid url found (%s)', member)
+            continue
+        firstname = match.groups(0)[0]
+        lastname = match.groups(0)[1]
+        names_only.append('%s %s' % (firstname, lastname))
+    return names_only
 
 

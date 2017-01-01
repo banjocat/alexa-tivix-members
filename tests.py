@@ -22,7 +22,7 @@ def test_get_only_tivix_names():
 
 def test_cannot_find_member():
     no_bio = get_closest_tivix_matched_bio('George Bush')
-    assert no_bio == 'Cannot find George Bush'
+    assert no_bio == 'Cannot find George Bush.'
 
 def test_bio_to_alexa_string():
     bret_bio = get_random_tivix_member_bio('bret-waters')
